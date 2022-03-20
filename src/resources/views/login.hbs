@@ -17,25 +17,32 @@
 
       <div class="grid grid-sm">
          <div class="form-container">
-            <form class="form" action="">
+            <form class="form" method="POST" action="/login/loginStore">
 
                <h3 class="form-heading">Đăng nhập nhân viên</h3>
                <p class="form-desc">Form đăng nhập dành cho nhân viên của Parallel Shine</p>
 
+               {{!-- NOTE: THEM CSS VO NHA --}}
+               {{#if message}}
+               <div>
+                  <strong>{{message.intro}}</strong> {{message.message}}
+               </div>
+               {{/if}}
+
                <div class="form-group">
                   <label for="username" class="form-label">Tên đăng nhập</label>
-                  <input id="username" type="text" class="form-input" placeholder="hoten@id">
+                  <input id="username" type="text" class="form-input" placeholder="hoten@id" name="email">
                   <span class="form-msg">Vui lòng nhập trường này</span>
                </div>
 
                <div class="form-group">
                   <label for="password" class="form-label">Mật khẩu</label>
-                  <input id="password" type="password" class="form-input" placeholder="matkhau123">
+                  <input id="password" type="password" class="form-input" placeholder="matkhau123" name="password">
                   <span class="form-msg">Vui lòng nhập trường này</span>
                </div>
 
                <div class="login-btn">
-                  <button class="btn-reverse btn--size-md btn--size-full">Đăng nhập</button>
+                  <button type="submit" class="btn-reverse btn--size-md btn--size-full">Đăng nhập</button>
                </div>
 
             </form>

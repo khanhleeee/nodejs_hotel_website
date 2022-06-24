@@ -23,7 +23,7 @@ const showBooking = (req, res, next) => {
 
 const confirm = async (req, res, next) => {
     const customer = await Customer.findByIdAndUpdate(req.params.id, { c_status: 'Đã xác nhận' })
-    await Room.updateOne({ _id: customer.roomID }, { $set: { r_status: 'đã đặt' } })
+    await Room.updateOne({ _id: customer.room.roomID }, { $set: { r_status: 'đã đặt' } })
     res.redirect('/admin/bookingRoom');
 }
 

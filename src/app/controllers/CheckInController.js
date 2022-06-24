@@ -8,7 +8,7 @@ const { mongooseToObject } = require('../../config/utility/mongoose');
 const { db } = require('../models/Customer');
 
 const showCheckIn = async (req, res, next) => {
-    const emptyRooms = await Room.find({ r_status: 'còn trống'});
+    const emptyRooms = await Room.find({ r_status: 'còn trống' });
     const roomBooked = await Customer.find({ c_status: 'Đã xác nhận' }).populate('room.roomID')
     var result = multipleToObject(roomBooked);
     for (var i in result) {
@@ -72,6 +72,7 @@ const taophieu = async (req, res, next) => {
     bill.save()
     res.redirect('/admin/checkIn')
 }
+
 const store = async (req, res, next) => {
     var customer = new Customer({
         c_name: req.body.c_name,
@@ -101,6 +102,7 @@ const store = async (req, res, next) => {
         .then(() => res.redirect('/admin/checkIn'))
         .catch(next);
 }
+
 const edit = async (req, res, next) => {
     const emptyRooms = await Room.find({ r_status: 'còn trống' });
     const customer = await Customer.findById(req.params.id).populate('room.roomID');
@@ -188,8 +190,8 @@ const checkoutBill = async (req, res, next) => {
     await Customer.updateOne({ _id: bill.customerID }, { $set: { c_status: 'Đã thanh toán' } });
     var customer = await Customer.findOne({ _id: bill.customerID });
     await Room.updateOne({ _id: customer.roomID }, { $set: { r_status: 'còn trống' } });
-    if(bill.b_total == 0) {
-        await Bill.updateOne({ _id: req.params.id }, { $set: { b_total: customer.c_total} });
+    if (bill.b_total == 0) {
+        await Bill.updateOne({ _id: req.params.id }, { $set: { b_total: customer.c_total } });
     }
     res.redirect('/admin/bill');
 }

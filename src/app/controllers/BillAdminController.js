@@ -16,21 +16,25 @@ const showBill = async (req, res, next) => {
 const showDetail = async (req, res, next) => {
     const bill = await Bill.findOne({ _id: req.params.id });
     const customer = await Customer.findOne({ _id: bill.customerID });
-    const room = await Room.findOne({ _id: customer.roomID });
+    const room = await Room.findOne({ _id: customer.room.roomID });
 
     var result = mongooseToObject(customer);
     result.c_checkin = result.c_checkin.toLocaleDateString('en-GB');
     result.c_checkout = result.c_checkout.toLocaleDateString('en-GB');
     var day_ms = (customer.c_checkout - customer.c_checkin);
     var dayrent = day_ms / 86400000;
-    var total = parseFloat(room.r_price.replace(/,/g, '')) * dayrent;
+    var total = result.room.price * dayrent;
+    result.room.price = Intl.NumberFormat().format(result.room.price);
     res.render('TabBillAdmin/billDetail', {
         layout: 'mainAdmin.hbs',
         bill: mongooseToObject(bill),
         customer: result,
         dayRent: dayrent,
         total: Intl.NumberFormat().format(total),
-        room: mongooseToObject(room),
+        room: {
+            roomID: req.body.roomID,
+            price: parseFloat(room.r_price)
+        }
     });
 }
 module.exports = { showBill, showDetail };

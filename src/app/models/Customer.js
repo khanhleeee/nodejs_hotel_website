@@ -9,7 +9,10 @@ const Customer = new Schema({
     c_checkout: { type: Date},
     c_total: { type: String, maxLength: 255 },
     c_status: { type: String, maxLength: 255, default: 'chờ xác nhận' },
-    roomID: { type: String, ref: 'Rooms' },
+    room: {
+        roomID: { type: String, ref: 'Rooms' },
+        price: { type: Number}
+    }
 }, {
     timestamps: true
 });

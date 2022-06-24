@@ -56,7 +56,10 @@ const showBookingRoom = (req, res, next) => {
         })
 }
 
-const store = (req, res, next) => {
+const store = async (req, res, next) => {
+    var room = await Room.findOne({ _id: req.body.roomID });
+    room.r_price = room.r_price.replace(/,/g, '');
+
     var customer = new Customer({
         c_name: req.body.c_name,
         c_phone: req.body.c_phone,
@@ -64,20 +67,23 @@ const store = (req, res, next) => {
         c_checkin: new Date(req.body.c_checkin),
         c_checkout: new Date(req.body.c_checkout),
         c_total: req.body.c_total,
-        roomID: req.body.roomID,
+        room: {
+            roomID: req.body.roomID,
+            price: parseFloat(room.r_price)
+        }
     });
-    customer.save(function (err, result) {
-        Customer.findById(result.id).populate('roomID')
-            // exec thực khi 
-            .exec(function (err, r) {
-                if (err) return console.log(err);
-                var customers = mongooseToObject(r);
-                customers.c_checkin = customers.c_checkin.toLocaleDateString('en-GB');
-                customers.c_checkout = customers.c_checkout.toLocaleDateString('en-GB');
-                res.render('TabRoomsClient/showBookingSuccess',{ layout: 'mainClient.hbs', 
-                customers: customers});
-            })
-    });
+
+    customer.save(customer)
+    .then(async (r) => {
+        const test = await Customer.findOne({ _id: r._id }).populate('room.roomID')
+        const cus = mongooseToObject(test)
+        cus.c_checkin = cus.c_checkin.toLocaleDateString('en-GB');
+        cus.c_checkout = cus.c_checkout.toLocaleDateString('en-GB');
+        res.render('TabRoomsClient/showBookingSuccess', {
+            layout: 'mainClient.hbs',
+            customers: cus
+        });
+    })
 }
 
 const quickSearchRoom = async (req, res, next) => {

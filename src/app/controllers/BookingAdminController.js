@@ -49,6 +49,7 @@ const quickSearchBooking = async (req, res, next) => {
         customer.c_checkout = customer.c_checkout.toLocaleDateString('en-GB');
     })
     res.render('TabBookingAdmin/bookingAdmin', { layout: 'mainAdmin.hbs', customers: customers});
+
 }
 
 module.exports = { showBooking, confirm, updateStatus, quickSearchBooking };

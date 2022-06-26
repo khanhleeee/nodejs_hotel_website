@@ -19,5 +19,9 @@ var checkinDate = document.querySelector('[data-toggle="startDate"]').flatpickr(
    }
  );
 
+ 
+
+ 
+
 
 

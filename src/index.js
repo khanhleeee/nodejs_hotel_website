@@ -6,7 +6,7 @@ const app = express();
 const route = require('./routes');
 const session = require('express-session');
 const path = require('path');
-const port = 4444;
+const port = 5555;
 
 const connection = require('./config/database/connection');
 

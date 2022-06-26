@@ -8,8 +8,8 @@ const { mongooseToObject } = require('../../config/utility/mongoose');
 const { db } = require('../models/Customer');
 
 const showCheckIn = async (req, res, next) => {
-    const emptyRooms = await Room.find({ r_status: 'còn trống'});
     const roomBooked = await Customer.find({ c_status: 'Đã xác nhận' }).populate('room.roomID')
+    const emptyRooms = await Room.find({ r_status: 'còn trống' });
     var result = multipleToObject(roomBooked);
     for (var i in result) {
         result[i].c_checkin = result[i].c_checkin.toLocaleDateString('en-GB');
@@ -20,6 +20,20 @@ const showCheckIn = async (req, res, next) => {
         rooms: multipleToObject(emptyRooms),
         roomBooked: result
     });
+    // const roomBooked = await Customer.find({ c_status: 'Đã xác nhận' }).populate('room.roomID')
+    // const emptyRooms = await Room.find({ r_status: 'còn trống'});
+    // const availableRooms = await Room.find({ r_status: {$nin: ['còn trống', 'không phục vụ']}, c_checkin: {$gt: new Date()}});
+    // res.json(availableRooms);
+    // var result = multipleToObject(roomBooked);
+    // for (var i in result) {
+    //     result[i].c_checkin = result[i].c_checkin.toLocaleDateString('en-GB');
+    //     result[i].c_checkout = result[i].c_checkout.toLocaleDateString('en-GB');
+    // }
+    // res.render('TabCheckInAdmin/checkInAdmin', {
+    //     layout: 'mainAdmin.hbs',
+    //     rooms: multipleToObject(emptyRooms),
+    //     roomBooked: result
+    // });
 }
 
 const showCheckInBooking = async (req, res, next) => {
@@ -73,7 +87,7 @@ const taophieu = async (req, res, next) => {
     res.redirect('/admin/checkIn')
 }
 const store = async (req, res, next) => {
-    var roomPrice = await Room.findOne({ r_number: req.body.r_number});
+    var roomPrice = await Room.findOne({ r_number: req.body.r_number });
     roomPrice.r_price = roomPrice.r_price.replace(/,/g, '');
 
     var customer = new Customer({
@@ -194,8 +208,8 @@ const checkoutBill = async (req, res, next) => {
     await Customer.updateOne({ _id: bill.customerID }, { $set: { c_status: 'Đã thanh toán' } });
     var customer = await Customer.findOne({ _id: bill.customerID });
     await Room.updateOne({ _id: customer.roomID }, { $set: { r_status: 'còn trống' } });
-    if(bill.b_total == 0) {
-        await Bill.updateOne({ _id: req.params.id }, { $set: { b_total: customer.c_total} });
+    if (bill.b_total == 0) {
+        await Bill.updateOne({ _id: req.params.id }, { $set: { b_total: customer.c_total } });
     }
     res.redirect('/admin/bill');
 }

@@ -8,17 +8,68 @@ const { mongooseToObject } = require('../../config/utility/mongoose');
 const { db } = require('../models/Customer');
 
 const showCheckIn = async (req, res, next) => {
-    const emptyRooms = await Room.find({ r_status: 'còn trống'});
+    // const roomBooked = await Customer.find({ c_status: 'Đã xác nhận' }).populate('room.roomID')
+    // const emptyRooms = await Room.find({ r_status: 'còn trống'});
+    // var result = multipleToObject(roomBooked);
+    // for (var i in result) {
+    //     result[i].c_checkin = result[i].c_checkin.toLocaleDateString('en-GB');
+    //     result[i].c_checkout = result[i].c_checkout.toLocaleDateString('en-GB');
+    // }
+    // res.render('TabCheckInAdmin/checkInAdmin', {
+    //     layout: 'mainAdmin.hbs',
+    //     rooms: multipleToObject(emptyRooms),
+    //     roomBooked: result
+    // });
     const roomBooked = await Customer.find({ c_status: 'Đã xác nhận' }).populate('room.roomID')
-    var result = multipleToObject(roomBooked);
-    for (var i in result) {
-        result[i].c_checkin = result[i].c_checkin.toLocaleDateString('en-GB');
-        result[i].c_checkout = result[i].c_checkout.toLocaleDateString('en-GB');
+    const emptyRooms = await Room.find({ r_status: 'còn trống'});
+    const availableRooms = await Room.find({ r_status: {$nin: ['còn trống', 'không phục vụ']}, c_checkin: {$gt: new Date()}});
+    
+    var rooms = [];
+    // Xử lý lưu phòng trống
+    for(let i in emptyRooms) {
+        let room = {
+            r_name: emptyRooms[i].r_name,
+            r_price: emptyRooms[i].r_price,
+            r_type: emptyRooms[i].r_type,
+            r_status: emptyRooms[i].r_status,
+            r_people: emptyRooms[i].r_people,
+            r_number: emptyRooms[i].r_number,
+            r_number: emptyRooms[i].r_number,
+            dayRent: {
+                checkin_date: '',
+                checkout_date: ''
+            }
+        }
+        rooms.push(room);
+    }
+    // Xử lý lưu phòng available
+    for(let i in availableRooms) {
+        const customer = await Customer.findOne({"room.roomID": availableRooms[i]._id, c_status: {$in: ['Đang checkin', 'Đã xác nhận']}});
+        let room = {
+            r_name: availableRooms[i].r_name,
+            r_price: availableRooms[i].r_price,
+            r_type: availableRooms[i].r_type,
+            r_status: availableRooms[i].r_status,
+            r_people: availableRooms[i].r_people,
+            r_number: availableRooms[i].r_number,
+            r_number: availableRooms[i].r_number,
+            dayRent: {
+                checkin_date: customer.c_checkin,
+                checkout_date: customer.c_checkout
+            }
+        }
+        rooms.push(room);
+    }
+    for (var i in rooms) {
+        if(rooms[i].dayRent.checkin_date !== '' && rooms[i].dayRent.checkout_date !== '') {
+            rooms[i].dayRent.checkin_date = rooms[i].dayRent.checkin_date.toLocaleDateString('en-GB');
+            rooms[i].dayRent.checkout_date = rooms[i].dayRent.checkout_date.toLocaleDateString('en-GB');
+        }
     }
     res.render('TabCheckInAdmin/checkInAdmin', {
         layout: 'mainAdmin.hbs',
-        rooms: multipleToObject(emptyRooms),
-        roomBooked: result
+        roomBooked: roomBooked,
+        rooms: rooms,
     });
 }
 
@@ -193,7 +244,7 @@ const checkoutBill = async (req, res, next) => {
     var bill = await Bill.findOne({ _id: req.params.id });
     await Customer.updateOne({ _id: bill.customerID }, { $set: { c_status: 'Đã thanh toán' } });
     var customer = await Customer.findOne({ _id: bill.customerID });
-    await Room.updateOne({ _id: customer.roomID }, { $set: { r_status: 'còn trống' } });
+    await Room.updateOne({ _id: customer.room.roomID }, { $set: { r_status: 'còn trống' } });
     if(bill.b_total == 0) {
         await Bill.updateOne({ _id: req.params.id }, { $set: { b_total: customer.c_total} });
     }

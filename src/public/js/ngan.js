@@ -25,10 +25,6 @@ var checkout = document.getElementById("checkout");
 checkin.onchange = function() {Total()}
 checkout.onchange = function() {Total()}
 function Total(){
-    // var d_checkin = checkin.value.slice(0,2);
-    // var d_checkout = checkout.value.slice(0,2);
-    // var m_checkin = checkin.value.slice(3,5);
-    // var m_checkout = checkout.value.slice(3,5);
     var d_checkin = checkin.value.slice(8,10);
     var d_checkout = checkout.value.slice(8,10);
     var m_checkin = checkin.value.slice(5,7);

@@ -10,7 +10,6 @@ const statisticDay = async (req, res, next) => {
     res.render('TabStatisticAdmin/statisticAdmin', { layout: 'mainAdmin.hbs'});
 }
 
-
 const statisticMonth = async (req, res, next) => {
    res.render('TabStatisticAdmin/statisticAdminMonth', { layout: 'mainAdmin.hbs'})
 }

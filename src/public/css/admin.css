@@ -630,3 +630,16 @@
     color: #999;
     font-size: 2rem;
  }
+.dayRent {
+    display: flex;
+    margin-top: 6px;
+    list-style-type: disc;
+}
+#room-checkin,
+#room-checkout {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    color: #fff;
+}

@@ -35,20 +35,12 @@
    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-{{!-- <script>
-   config = {
-      dateFormat: "d-m-Y",
-      minDate: "today",
-   }
-   flatpickr("input[type=datetime-local]", config);
-</script> --}}
 
 <script>
-   var checkoutDate = document.querySelector('[data-toggle="endDateFilter"]').flatpickr(
+var checkoutDate = document.querySelector('[data-toggle="endDateFilter"]').flatpickr(
    {
       altInput: true,
-      altFormat: "d-m-Y",
-      minDate: 10-10-2000,
+      altFormat: "d-m-Y"
    }
  );
  
@@ -57,10 +49,13 @@ var checkinDate = document.querySelector('[data-toggle="startDateFilter"]').flat
    {
       altInput: true,
       altFormat: "d-m-Y",
-      minDate: 10-10-2000,
+      onChange: function(dateObj, dateStr) {  
+         checkoutDate.set('minDate', new Date(dateStr).fp_incr(1));
+         // flatpickr(checkoutDate, {dateFormat: "d-m-Y", minDate: new Date(dateStr).fp_incr(1)});
      }
+   }
  );
-</script>
+</script>>
 
 {{!-- jquery --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

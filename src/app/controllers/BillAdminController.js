@@ -31,10 +31,7 @@ const showDetail = async (req, res, next) => {
         customer: result,
         dayRent: dayrent,
         total: Intl.NumberFormat().format(total),
-        room: {
-            roomID: req.body.roomID,
-            price: parseFloat(room.r_price)
-        }
+        room: mongooseToObject(room),
     });
 }
 module.exports = { showBill, showDetail };

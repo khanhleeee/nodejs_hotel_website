@@ -48,25 +48,27 @@
                <div class="row">
                   <div class="col l-6 m-6 c-12">
                      <label for="checkin" class="form-label">Ngày nhận phòng</label>
-                     <input id="checkin" name="c_checkin" data-toggle="startDate" type="datetime-local" class="form-input"
-                        placeholder="Nhập ngày nhận phòng">
+                     <input id="checkin" name="c_checkin" data-toggle="startDate" type="datetime-local"
+                        class="form-input" placeholder="Nhập ngày nhận phòng">
                   </div>
 
                   <div class="col l-6 m-6 c-12">
                      <label for="checkout" class="form-label">Ngày trả phòng</label>
-                     <input id="checkout" data-toggle="endDate" name="c_checkout" type="datetime-local" class="form-input"
-                        placeholder="Nhập ngày trả phòng">
+                     <input id="checkout" data-toggle="endDate" name="c_checkout" type="datetime-local"
+                        class="form-input" placeholder="Nhập ngày trả phòng">
                   </div>
                </div>
                <div class="row">
                   <div class="col l-4 m-4 c-12">
                      <label for="room-id-input" class="form-label">Số phòng</label>
-                     <input id="room-id-input" name="r_number" type="text" class="form-input" placeholder="Nhập số phòng">
+                     <input id="room-id-input" name="r_number" type="text" class="form-input"
+                        placeholder="Nhập số phòng">
                   </div>
 
                   <div class="col l-4 m-4 c-12">
                      <label for="room-name-input" class="form-label">Tên phòng</label>
-                     <input id="room-name-input" name="r_name" type="text" class="form-input" placeholder="Nhập tên phòng">
+                     <input id="room-name-input" name="r_name" type="text" class="form-input"
+                        placeholder="Nhập tên phòng">
                   </div>
 
                   <div class="col l-4 m-4 c-12">
@@ -97,7 +99,8 @@
                      <div class="col l-4 m-12 c-12 l-o-8">
                         <div class="search-bar">
                            <i class="search-icon fas fa-search"></i>
-                           <input id="myInputAdmin" class="search-input" type="text" name="input-search" placeholder="Nhập tìm kiếm...">
+                           <input id="myInputAdmin" class="search-input" type="text" name="input-search"
+                              placeholder="Nhập tìm kiếm...">
                         </div>
                      </div>
 
@@ -115,16 +118,16 @@
                            {{#each roomBooked}}
                            <tbody id="myTable">
                               <tr>
-                              <td>{{this.room.roomID.r_number}}</td>
-                              <td>{{this.room.roomID.r_name}}</td>
-                              <td>{{this.c_name}}</td>
-                              <td>{{this.c_phone}}</td>
-                              <td>{{this.c_checkin}}</td>
-                              <td>{{this.c_checkout}}</td>
-                              <td>
-                                 <a class="status-btn" href="/admin/checkIn/{{this._id}}/checkInBooking">Checkin</a>
-                              </td>
-                           </tr>
+                                 <td>{{this.room.roomID.r_number}}</td>
+                                 <td>{{this.room.roomID.r_name}}</td>
+                                 <td>{{this.c_name}}</td>
+                                 <td>{{this.c_phone}}</td>
+                                 <td>{{this.c_checkin}}</td>
+                                 <td>{{this.c_checkout}}</td>
+                                 <td>
+                                    <a class="status-btn" href="/admin/checkIn/{{this._id}}/checkInBooking">Checkin</a>
+                                 </td>
+                              </tr>
                            </tbody>
                            {{/each}}
                         </table>
@@ -137,8 +140,8 @@
                   {{!-- row row-staff filter-row-mobile filter-row-mobile-noreverse row-margin --}}
                   <div class="row">
                      <div class="col l-4 m-12 c-12 l-o-8">
-                       <div class="search-bar">
-                          <i class="search-icon fas fa-search"></i>
+                        <div class="search-bar">
+                           <i class="search-icon fas fa-search"></i>
                            <input id="myInput" class="search-bar-input" type="text" name="input-search"
                               placeholder="Nhập tìm kiếm...">
                         </div>
@@ -148,10 +151,6 @@
                      <div class="js-myroom col l-4 m-6 c-12">
                         <div class="adm-room-link">
                            <div class="adm-room-card adm-room-card-checkin">
-                              {{!-- <div class="adm-room-img" style="background-image: url({{this.r_img.thumbnail}});">
-                                 <div class="adm-room-number">{{this.r_number}}</div>
-                                 <div class="adm-room-status">{{this.r_status}}</div>
-                              </div> --}}
                               <div class="adm-room-info">
                                  <div class="adm-room-attr">
                                     <span id="room-id" class="adm-room-type">{{this.r_number}}</span>
@@ -162,7 +161,32 @@
                                  </div>
                                  <div class="adm-room-value">
                                     <p class="adm-room-people">{{this.r_people}} người</p>
-                                    <p class="adm-room-people">Giường: {{this.r_bed}}</p>
+                                    {{#ifEquals r_status 'còn trống'}}
+                                    <p class="adm-room-people">Tình trạng:
+                                       <span style="color: #56f000;">{{this.r_status}}</span>
+                                    </p>
+                                    {{/ifEquals}}
+                                    {{#ifEquals r_status 'đã đặt'}}
+                                    <p class="adm-room-people">Tình trạng:
+                                       <span style="color: #eab200;">{{this.r_status}}</span>
+                                    </p>
+                                    {{/ifEquals}}
+                                    {{#ifEquals r_status 'đang sử dụng'}}
+                                    <p class="adm-room-people">Tình trạng:
+                                       <span style="color: #df5144;">{{this.r_status}}</span>
+                                    </p>
+                                    {{/ifEquals}}
+
+                                    {{#ifEquals dayRent.checkin_date ''}}
+                                    {{else}}
+                                    <span>Ngày thuê:</span>
+                                    <ul class="dayRent">
+                                       <li>
+                                          <span id="room-checkin">{{this.dayRent.checkin_date}}</span> -
+                                          <span id="room-checkout">{{this.dayRent.checkout_date}}</span>
+                                       </li>
+                                    </ul>
+                                    {{/ifEquals}}
                                  </div>
                               </div>
                            </div>
@@ -177,7 +201,44 @@
    </div>
 </div>
 
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
 <script>
+   const checkinInput = document.querySelector('#checkin');
+   const checkoutInput = document.querySelector('#checkout');
+   var checkinDate, checkoutDate;
+   checkinInput.oninput = function () {
+      checkinDate = new Date(checkinInput.value);
+      CheckRooms();
+   }
+
+   checkoutInput.oninput = function () {
+      checkoutDate = new Date(checkoutInput.value);
+      CheckRooms();
+   }
+
+
+
+   function CheckRooms() {
+      var rooms = document.querySelectorAll('.js-myroom').forEach(room => {
+         var checkin = room.querySelector('#room-checkin');
+         var checkout = room.querySelector('#room-checkout');
+         if (checkin !== null && checkout !== null) {
+            checkin = checkin.innerText;
+            checkout = checkout.innerText;
+            var dateCheckInObject = moment(checkin, "DD/MM/YYYY");
+            var dateCheckOutObject = moment(checkout, "DD/MM/YYYY");
+            var dateCheckIn = dateCheckInObject.toDate();
+            var dateCheckOut = dateCheckOutObject.toDate();
+
+            if (checkoutDate < dateCheckIn || checkinDate > dateCheckOut) {
+               room.classList.remove("room-filter-none");
+            } else {
+               room.classList.add("room-filter-none");
+            }
+         }
+      })
+   }
+
    var roomID_input = document.querySelector('#room-id-input');
    var roomName_input = document.querySelector('#room-name-input');
    var roomPrice_input = document.querySelector('#room-price');
@@ -188,12 +249,14 @@
       var roomName = room.querySelector('#room-name').innerText;
       var roomPrice = room.querySelector('#room-pr').innerText;
 
-      room.addEventListener('click', function(){
+      room.addEventListener('click', function() {
          roomID_input.value = roomID;
          roomName_input.value = roomName;
          roomPrice_input.value = roomPrice;
+         var totalDays = (checkoutDate - checkinDate) / 86400000;
+         roomPrice = roomPrice.replace(/,/g, '');
+         var totalPrice = parseFloat(roomPrice) * totalDays;
+         total.value = Intl.NumberFormat().format(totalPrice);
       })
    });
 </script>
-<script src="/js/ngan.js"></script>
-

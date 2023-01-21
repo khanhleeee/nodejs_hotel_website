@@ -1,17 +1,13 @@
 /* phần Ngân */
 
-
-
-/* Trang danh sách phòng */
-
 /* leftside */
 .content-title {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .date-checkin {
-   text-align: center;
-   margin: 10px 0;
+   margin-bottom: 10px;
 }
 
 .room-categories {
@@ -19,32 +15,34 @@
 }
 
 .room-categories-item {
-   text-align: center;
-   justify-content: space-around;
-   margin: 20px 20px 10px 20px;
-   overflow: hidden;
-   cursor: pointer;
-   
+   display: flex;
+   padding: 16px 2px;
+   justify-content: space-between; 
+   cursor: pointer;  
 }
 
-.room-categories-item i {
-   margin-left: 123px;
+.room-categories-item span {
+   font-size: 1.8rem;
+   font-weight: 500;
 }
 
 .room-categories-detail {
-   display: block;
-   text-align: center;
+   display: flex;
    overflow: hidden;
    max-height: 0;
    transition: max-height 0.2s ease-in-out;
-   
+   flex-direction: column;
 }
 
-.room-categories-detail p {
-   margin: 10px 0;
+.room-categories-detail a {
+   display: block;
+   padding:16px 0;
+   text-decoration: none;
+   color: var(--black-color);
+   border-bottom: 1px solid #d3b69a;
 }
 
-.room-categories-detail p:hover {
+.room-categories-detail a:hover {
   font-weight: 600;
   cursor: pointer;
 }
@@ -55,23 +53,23 @@
 
 
 /* rightside */
-
-.search-bar-container{
-    display: block;
-    text-align: right;
+.search-room {
+   margin-bottom: 50px;
 }
-
 .input-with-icon-container {
-    display: inline-flex;
-    border: 1px solid #ccc; 
-    padding: 10px;
-    justify-content: space-between;
+   display: flex;
+   justify-content: space-between;
+   border-radius: 3px;
+   border: 1px solid #ccc; 
+   padding: 12px 10px;
 }
 
 
 .search-bar-input {
     border: none;
     outline: none;
+    width: 80%;
+    height: 100%;
     font-size: 1.6rem;
 }
 
@@ -85,85 +83,71 @@
 }
 
 
-
  /* Chi tiết phòng */
- .room-detail {
-    display: flex;
- }
- 
- .room-detail-pic {
-    display: flex;
-    flex-direction: column;
- }
- 
- .room-detail-pic img {
-   border-radius: 5px;
- }
- 
- .main-pic {
-    display: flex;
-    margin: auto;
- }
- 
- .main-pic img {
-    width: 640px;
-    height: 480px;
- }
- 
- .sub-pic {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 10px 0;
- }
- 
- .sub-pic img {
-    width: 120px;
-    height: 110px;
-    
- }
- 
- .booking-room {
-    display: flex;
-    flex-direction: column;
-   margin: 122px;
- }
- 
- .booking-room-button {
-    height: 36px;
-    border-radius: 5px;
-    background-color: var(--primary-color);
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--white-color);
-    outline: none;
-    width: 50%;
-    margin: 24px auto;
- }
- 
- .room-detail-btn {
-   margin: 0 auto;
-   padding: 30px;
- }
 
- .room-detail-description p{
-    margin-top: 24px;
- }
+.room-detail-btn {
+   text-align: center;
+}
+
+.btn-booking-detail {
+   margin-top: 16px;
+   height: 50px;
+}
+
+.btn-booking-detail a{
+   height: x;
+   display: block;
+   text-align: center;
+   margin-top: 30px;
+   margin-bottom: 10px;
+}
  
- .room-detail-description-name{
-   font-size: 3.0rem;
+.booking-detail-description{
+   margin-left: 30px;
+   margin-right: 30px;
+   /* font-size: 2.2rem; */
+}
+
+.booking-detail-description p{
+   padding: 10px 13px;
+}
+ 
+.booking-detail-description-name{
+   font-size: 2.6rem;
+   color: var(--second-color);
    font-weight: 600;
- }
- .room-detail-description-price{
-    color: var(--second-color);
-    font-size: 2.6rem;
-    font-weight: 600;
- }
- .room-detail-description-content{
-   font-size: 2.0rem;
- }
- 
- 
+}
+
+.booking-detail-description-price{
+   font-size: 2.6rem;
+   color: var(--second-color);
+   font-weight: 600;
+}
+
+.booking-detail-description-content{
+   font-size: 2.2rem;
+}
+
+.booking-detail-description-note{
+   font-size: 2.2rem;
+   color: gray;
+}
+
  /* Trang chi tiết đặt phòng */
+   /* #total {
+      margin: 0;
+      padding: 0;
+      font-size: 2.4rem;
+      font-weight: 600;
+      border: none;
+      width: 135px;
+      text-align: center;
+   } */
+
+   #title-total{
+      padding-top: 10px;
+   }
+
  .booking-room-head{
     display: flex;
  }
@@ -186,10 +170,20 @@
  .booking-room-description p{
     padding: 12px 16px;
  }
- 
+
+ .room-detail-description-name, .room-detail-description-price {
+    font-size: 2.4rem;
+    color: var(--second-color);
+    font-weight: 600;
+ }
+
  .room-detail-description-note {
     font-size: 1.8rem;
     color: gray;
+ }
+
+ .room-detail-description-btn{
+   padding: 12px 16px;
  }
  
 .booking-room-title {
@@ -207,11 +201,17 @@
    justify-content: space-between;
 }
 
- .form-group-row {
+ .form-group {
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    /* flex-direction: column; */
  }
  
+ .small-form {
+    width: 70%;
+    margin: auto;
+ }
  /* phần mã khuyến mãi */
  hr {
     margin: 30px 0;
@@ -271,3 +271,101 @@
     margin: 10px 64px;
     
  }
+
+ /* icon success */
+ .icon-booking-success {
+   font-size: 50px;
+   color: rgb(66, 170, 66);
+   margin-bottom: 20px;
+}
+.form-input-success {
+   background-color: rgb(192, 189, 189);
+   width: 100%;
+}
+
+.booking-input{
+   width: 100%;
+}
+
+/* modal delete */
+.modal{
+   background: rgba(0 0 0 /43%);
+   position: fixed;
+   top: 0;
+   height: 100vh;
+   width: 100vw;
+   opacity: 0;
+   pointer-events: none;
+   
+}
+
+.modal.show{
+   opacity: 1;
+   pointer-events: auto;
+}
+.modalContent{
+   width: 400px;
+   position: relative;
+   top: 5%;
+   margin: auto;
+   background: var(--white-color);
+   box-shadow: 2px 5px 5px gray;
+   border-radius: 5px;
+   overflow: hidden;
+}
+
+.modal-header{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 15px;
+   background: var(--primary-color);
+   color: var(--white-color);
+   font-size: 1.6rem;
+   font-family: 'Roboto', sans-serif;
+}
+.modal-content{
+   padding: 15px;
+   font-size: 1.6rem;
+   font-family: 'Roboto', sans-serif;
+}
+.modal-footer{
+   text-align: right;
+   padding: 15px;
+   
+}
+
+.del, .cancel {
+   display: inline-block;
+   text-align: center;
+   color: var(--white-color);
+   background-color: rgb(56, 72, 80);
+   min-width: 90px;
+   font-size: 1.4rem;
+   padding: 8px 10px;
+   border-radius: 3px;
+   cursor: pointer;  
+   border: none;
+}
+.del {
+   margin-right: 8px;
+}
+
+.del:hover {
+   transform: translateY(1px);
+   background-color: var(--second-color);
+}
+
+.cancel:hover {
+   transform: translateY(1px);
+   background-color: var(--second-color);
+}
+
+.price-room {
+   /* position: relative; */
+   display: flex;
+}
+
+.price-room i{
+   padding: 12px 16px 12px 0;
+}

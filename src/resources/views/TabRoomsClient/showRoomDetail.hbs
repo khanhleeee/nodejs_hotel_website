@@ -1,0 +1,60 @@
+ <!-- Start main -->
+      <main class="main-section">
+         <!-- Start Slider -->
+         <div class="slider-area slider-height2">
+            <div class="slider-slogan-container">
+               <div class="slider-slogan">
+                  <span class="slider-slogan-text">
+                     Chi tiết phòng
+                  </span>
+               </div>
+            </div>
+         </div>
+
+      <!-- Start Content -->
+
+      <div class="content-section">
+         <div class="content-container">
+            <div class="grid wide">                   
+                 <div class="booking-room-head">
+                    <div class="booking-room-pic">
+                        <img src="{{rooms.r_img.thumbnail}}" alt="">
+                    </div>
+                    <div class="booking-detail-description">
+                        <p class="booking-detail-description-name">{{rooms.r_name}}</p>
+                        <div class="price-room">
+                           <p id="room-price" class="room-detail-description-price">{{rooms.r_price}}</p>
+                           <i class="fa-solid fa-dong-sign room-detail-description-price"></i> 
+                        </div>
+                        <p class="booking-detail-description-content">{{rooms.r_desc}}</p>
+                        <p class="booking-detail-description-note">Số người ở: {{rooms.r_people}} người</p>
+                        <p class="booking-detail-description-note">Giường: {{rooms.r_bed}} </p>
+                        {{!-- <p class="booking-detail-description-note">Tiện ích: {{rooms.r_utilities}}</p> --}}
+                        
+                     <div class="btn-booking-detail">
+                        <a class="btn btn-reverse btn--size-s " href="{{rooms._id}}/showBookingRoom">ĐẶT PHÒNG NGAY</a>
+                     </div>
+                        
+                    </div>
+                </div>
+
+                
+                {{!-- <div class="room-detail-description">
+                    <p class="room-detail-description-name">{{rooms.r_name}}</p>
+                    <p class="room-detail-description-price">{{rooms.r_price}}</p>
+                    <p class="room-detail-description-content">{{rooms.r_desc}}</p>
+                    <p class="room-detail-description-note">Số người ở: {{rooms.r_people.adult}} người lớn,  {{rooms.r_people.children}} trẻ em</p>
+                    <p class="room-detail-description-note">Giường: {{rooms.r_bed}} </p>
+                    <p class="room-detail-description-note">Tiện ích: {{rooms.r_utilities}} </p>
+                </div> --}}
+            </div>
+         </div>
+
+      </div>
+
+      <!-- End Content -->
+
+      </main>
+      <!-- End main -->
+      {{!-- Script chọn ngày giờ--}}
+      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

@@ -16,16 +16,16 @@ html {
    font-family: 'Roboto', sans-serif;
    font-size: 10px;
 }
-
+/* 
 .grid {
    width: 1200px;
    max-width: 100%;
    margin: 0 auto;
-}
+} */
 
 
 /* Row and Col */
-.row {
+/* .row {
    display: flex;
    flex-wrap: wrap;
 }
@@ -44,7 +44,7 @@ html {
 
 .col-4 {
    width: calc(100% / 3);
-}
+} */
 
 
 .logo {
@@ -90,12 +90,18 @@ html {
 }
 
 /* Ngân thêm */
-.btn--size-s--black {
+
+/* .btn--size-s--black {
    
    border: 1px solid var(--second-color);
    color: var(--primary-color);
    
-}
+} */
+
+/* .btn-roomDetail {
+   border: 1px solid var(--second-color);
+   color: var(--primary-color);
+} */
 
 .btn--size-s:hover {
    
@@ -105,21 +111,18 @@ html {
 }
 
 .padding-left-10 {
-   padding-left: 10px;
+   /* padding-left: 10px; */
+   width: calc(100%/2);
 }
 
 .padding-right-10 {
-   padding-right: 10px;
+   /* padding-right: 10px; */
+   width: calc(100%/2);
 }
-
-
-/* .input-with-icon-container-detail {
-   align-items: flex-end;
-} */
-
 
 .btn--size-full {
    width: 100% !important;
+   display: block;
 }
 
 .btn:hover {
@@ -138,8 +141,6 @@ html {
 .btn.btn-welcome {
    margin-top: 50px;
 }
-
-/* Open/Close Site Bar */
 
 
 /* Animation */

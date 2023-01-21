@@ -1,0 +1,84 @@
+<div class="main">
+    <div class="header">
+        <div class="menu-mobile">
+            <label for="nav-mobile-input">
+                <i class="fa-solid fa-bars"></i>
+            </label>
+        </div>
+
+        <div class="user-avatar">
+            <div class="user-img-container">
+                <img src="https://demo.dashboardpack.com/cryptocurrency-html/img/transfer/4.png" alt=""
+                    class="user-img">
+            </div>
+            <div class="user-info">
+                <p class="user-name">User Name</p>
+                <p class="user-role">User Role</p>
+            </div>
+
+            <div class="user-function">
+                <a href="" class="function-item">Log Out</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="grid">
+            <p class="page-title">Thống kê doanh thu</p>
+            <div class="table-list-container">
+                <div class="row filter-row-mobile">
+                    <div class="col l-8 m-12 c-12">
+                        <div class="filter-container">
+                            <a href="/admin/statistic" class="filter-link">
+                                <span class="filter-box">Theo ngày</span>
+                            </a>
+                            <a href="/admin/statisticMonth" class="filter-link filter-month">
+                                <span class="filter-box ">Theo tháng</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col l-4 m-12 c-12"></div>
+                </div>
+
+                <div class="row filter-row-mobile">
+                    <div class="col l-6 m-12 c-12">
+                        {{#if total}}
+                        <div class="row">
+                            <div class="col l-12 m-12 c-12">
+                                <p class="statistic-order">Tổng hoá đơn: {{countOrder}}</p>
+                                <p class="statistic-total">{{total}} đ</p>
+                            </div>
+                        </div>
+                        {{else}}
+                        <div class="row">
+                            <div class="col l-12 m-12 c-12">
+                                <p class="page-title-statistic">Tổng doanh thu</p>
+                                <p class="statistic-total">Chưa có dữ liệu</p>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div class="col l-6 m-12 c-12 statistic-day">
+                        <form action="./filter" method="POST">
+                            <div class="row">
+                                <div class=" col l-6 m-6 c-6">
+                                    <p class="page-title-statistic ">Từ ngày</p>
+                                    <input id="startDate" type="date" class="form-input booking-input" name="startDate">
+                                </div>
+                                <div class=" col l-6 m-6 c-6">
+                                    <p class="page-title-statistic ">Đến ngày</p>
+                                    <input id="endDate" type="date" class="form-input booking-input" name="endDate">
+                                </div>
+                            </div>
+                            <div class="row no-gutters submit-btn-container">
+                                <button class="status-btn submit-btn ">Thống kê doanh thu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
